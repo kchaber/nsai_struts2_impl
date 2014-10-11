@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div style="background: #ff7373">
-	<span style="color: black">EXAMPLE MENU</span>
+	<span style="color: black"><s:text name="labels.menu.example"/></span>
 	<s:form method="POST">
 		<s:submit action="testOtherAction" value="test other action"/>
 	</s:form>
