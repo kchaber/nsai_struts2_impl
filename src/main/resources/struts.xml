@@ -9,14 +9,12 @@
 
 	<package name="struts-2-nsai" namespace="/" extends="struts-default">
 		<result-types>
-			<result-type name="tiles"
-				class="org.apache.struts2.views.tiles.TilesResult" />
+			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 
 		<interceptors>
 			<!-- add mapping to the created login interceptor -->
-			<interceptor name="loginInterceptor"
-				class="pl.dmcs.nsai.struts2.interceptors.LoginInterceptor" />
+			<interceptor name="loginInterceptor" class="pl.dmcs.nsai.struts2.interceptors.LoginInterceptor" />
 
 			<!-- put the interceptor to the interceptors stack -->
 			<interceptor-stack name="nsaiDefaultStack">
@@ -25,8 +23,7 @@
 			</interceptor-stack>
 		</interceptors>
 
-		<!-- mark the interceptors stack with the custom login interceptor as the 
-			default one -->
+		<!-- mark the interceptors stack with the custom login interceptor as the default one -->
 		<default-interceptor-ref name="nsaiDefaultStack" />
 
 		<global-results>
@@ -34,21 +31,18 @@
 		</global-results>
 
 		<!-- Login action mapping -->
-		<action name="*Login" class="pl.dmcs.nsai.struts2.actions.LoginAction"
-			method="{1}">
+		<action name="*Login" class="pl.dmcs.nsai.struts2.actions.LoginAction" method="{1}">
 			<result name="input" type="tiles">LoginDef</result>
 			<result name="success" type="tiles">WelcomeDef</result>
 		</action>
 
 		<!-- Some other action mapping -->
-		<action name="*OtherAction" class="pl.dmcs.nsai.struts2.actions.OtherAction"
-			method="{1}">
+		<action name="*OtherAction" class="pl.dmcs.nsai.struts2.actions.OtherAction" method="{1}">
 			<result name="input" type="tiles">OtherViewDef</result>
 			<result name="success" type="tiles">OtherViewDef</result>
 		</action>
 
-		<action name="*AjaxAction" class="pl.dmcs.nsai.struts2.actions.AjaxAction"
-			method="{1}">
+		<action name="*AjaxAction" class="pl.dmcs.nsai.struts2.actions.AjaxAction" method="{1}">
 			<!-- Store action elements in the session -->
 			<interceptor-ref name="nsaiDefaultStack" />
 			<interceptor-ref name="scope">
@@ -61,8 +55,7 @@
 		</action>
 
 		<!--Localization action -->
-		<action name="locale" class="pl.dmcs.nsai.struts2.actions.LocaleAction"
-			method="execute">
+		<action name="locale" class="pl.dmcs.nsai.struts2.actions.LocaleAction" method="execute">
 			<result name="success" type="tiles">LoginDef</result>
 		</action>
 

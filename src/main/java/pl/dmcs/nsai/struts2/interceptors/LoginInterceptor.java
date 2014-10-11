@@ -2,6 +2,7 @@ package pl.dmcs.nsai.struts2.interceptors;
 
 import java.util.Map;
 
+import pl.dmcs.nsai.struts2.actions.LocaleAction;
 import pl.dmcs.nsai.struts2.actions.LoginAction;
 import pl.dmcs.nsai.struts2.actions.RegisterAction;
 
@@ -24,7 +25,7 @@ public class LoginInterceptor extends AbstractInterceptor {
 		ActionSupport action = (ActionSupport) invocation.getAction();
 		
 		//validates all actions except LoginAction and RegisterAction
-		boolean validateAction = !(action instanceof LoginAction || action instanceof RegisterAction); 
+		boolean validateAction = !(action instanceof LoginAction || action instanceof RegisterAction || action instanceof LocaleAction); 
 		
 		//check if session has expired
 		if (validateAction && (sessionAttributes == null || sessionAttributes.get(LoginAction.USER_CONTEXT_PARAM_NAME) == null)) {
