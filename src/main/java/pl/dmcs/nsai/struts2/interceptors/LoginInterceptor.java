@@ -24,7 +24,7 @@ public class LoginInterceptor extends AbstractInterceptor {
 		Map<String, Object> sessionAttributes = invocation.getInvocationContext().getSession();
 		ActionSupport action = (ActionSupport) invocation.getAction();
 		
-		//validates all actions except LoginAction and RegisterAction
+		//validates all actions except LoginAction, RegisterAction and LocaleAction
 		boolean validateAction = !(action instanceof LoginAction || action instanceof RegisterAction || action instanceof LocaleAction); 
 		
 		//check if session has expired
