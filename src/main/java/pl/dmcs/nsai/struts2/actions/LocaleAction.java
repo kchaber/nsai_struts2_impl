@@ -11,3 +11,4 @@ public class LocaleAction extends ActionSupport{
 	}
 	
 }
+

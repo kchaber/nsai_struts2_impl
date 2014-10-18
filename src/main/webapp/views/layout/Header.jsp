@@ -16,3 +16,4 @@
 	<span> <s:a href="%{loginEN}">English</s:a></span> 
 	<span> <s:a href="%{loginPL}">Polski</s:a></span>
 </div>
+

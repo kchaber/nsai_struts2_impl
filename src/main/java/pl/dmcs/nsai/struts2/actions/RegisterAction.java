@@ -43,17 +43,9 @@ public class RegisterAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
 	@RequiredStringValidator(message = "${getText('errors.required', new java.lang.String[]{fieldName})}")
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	@RequiredStringValidator(message = "${getText('errors.required', new java.lang.String[]{fieldName})}")
@@ -61,12 +53,20 @@ public class RegisterAction extends ActionSupport {
 		this.password = password;
 	}
 
-	public String getPasswordConfirm() {
-		return passwordConfirm;
-	}
-
 	@RequiredStringValidator(message = "${getText('errors.required', new java.lang.String[]{fieldName})}", shortCircuit = true)
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+	
+	public String getUsername() {
+		return username;
 	}
 }
