@@ -31,5 +31,3 @@
 		<put-attribute name="body" value="/views/OtherView.jsp" />
 	</definition>
 </tiles-definitions>
-
-
