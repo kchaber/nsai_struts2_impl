@@ -13,4 +13,3 @@
 		<s:submit name="submit" key="buttons.register"/>
 	</s:form>
 </div>
-
