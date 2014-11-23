@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import pl.dmcs.nsai.struts2.services.ParkingService;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -24,6 +26,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	private String password;
 	
 	private Map<String, Object> session = new HashMap<>();
+	
+	private ParkingService parkingService;
 	
 	public String login() throws Exception {
 		//put the username to the session parameter
@@ -51,5 +55,13 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public ParkingService getParkingService() {
+		return parkingService;
+	}
+
+	public void setParkingService(ParkingService parkingService) {
+		this.parkingService = parkingService;
 	}
 }

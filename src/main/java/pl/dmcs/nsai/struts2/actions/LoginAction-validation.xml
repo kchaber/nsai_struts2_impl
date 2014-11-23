@@ -4,21 +4,21 @@
 <validators>
 	<field name="username">
 		<field-validator type="requiredstring" short-circuit="true">
-			<message>${getText('errors.required', new java.lang.String[]{fieldName})}</message>
+			<message>${getText('errors.required', new java.lang.String[]{getText('labels.login.username')})}</message>
 		</field-validator>
 		<field-validator type="fieldexpression" short-circuit="true">
 			<param name="expression">username eq 'admin'</param>
-			<message>${getText('errors.invalid', new java.lang.String[]{fieldName})}</message>
+			<message>${getText('errors.invalid', new java.lang.String[]{getText('labels.login.username')})}</message>
 		</field-validator>
 	</field>
 
 	<field name="password">
 		<field-validator type="requiredstring" short-circuit="true">
-			<message>${getText('errors.required', new java.lang.String[]{fieldName})}</message>
+			<message>${getText('errors.required', new java.lang.String[]{getText('labels.login.password')})}</message>
 		</field-validator>
 		<field-validator type="fieldexpression" short-circuit="true">
 			<param name="expression">password eq 'admin'</param>
-			<message>${getText('errors.invalid', new java.lang.String[]{fieldName})}</message>
+			<message>${getText('errors.invalid', new java.lang.String[]{getText('labels.login.password')})}</message>
 		</field-validator>
 	</field>
 </validators>
