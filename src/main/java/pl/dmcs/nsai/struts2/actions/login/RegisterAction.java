@@ -1,4 +1,4 @@
-package pl.dmcs.nsai.struts2.actions;
+package pl.dmcs.nsai.struts2.actions.login;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -21,7 +21,7 @@ import com.opensymphony.xwork2.validator.annotations.Validations;
 @Action("*Register")
 @Validations(
 		expressions = {
-			@ExpressionValidator(expression = "password eq passwordConfirm", message = "${getText('labels.register.invalidpasswordConfirm')}")
+			@ExpressionValidator(expression = "password eq passwordConfirm", message = "${getText('register.invalidpasswordConfirm')}")
 		}
 )
 public class RegisterAction extends ActionSupport {

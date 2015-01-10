@@ -3,5 +3,5 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <div>
-	<s:text name="labels.welcome.welcomeText"/>&nbsp;<s:property value="username"/>
+	<s:text name="welcome.welcomeText"/>&nbsp;<s:property value="username"/>
 </div>

@@ -3,8 +3,8 @@ package pl.dmcs.nsai.struts2.interceptors;
 import java.util.Map;
 
 import pl.dmcs.nsai.struts2.actions.LocaleAction;
-import pl.dmcs.nsai.struts2.actions.LoginAction;
-import pl.dmcs.nsai.struts2.actions.RegisterAction;
+import pl.dmcs.nsai.struts2.actions.login.LoginAction;
+import pl.dmcs.nsai.struts2.actions.login.RegisterAction;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;

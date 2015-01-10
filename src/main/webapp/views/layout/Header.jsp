@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div>
-	<span style="text-align: center; margin-left: 45%;"><s:text name="labels.header.example" /></span>
+	<span style="text-align: center; margin-left: 45%;"><s:text name="header.example" /></span>
 </div>
 
 <s:url id="loginEN" namespace="/" action="locale">

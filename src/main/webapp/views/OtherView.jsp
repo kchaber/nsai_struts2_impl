@@ -7,7 +7,7 @@
 <sj:head />
 
 <s:form id="other-form" method="POST" theme="simple">
-	<span><s:text name="labels.other.otherView"/></span>
+	<span><s:text name="other.otherView"/></span>
 	<div id="string-lists" style="width: 500px; background: #afeeee; padding: 50px;">
 		<jsp:include page="ajax/StringsList.jsp" />
 	</div>

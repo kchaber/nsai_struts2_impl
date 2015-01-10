@@ -6,8 +6,8 @@
 	<s:actionerror/>
 
 	<s:form method="POST" action="loginLogin">
-		<s:textfield name="username" key="labels.login.username"/>
-		<s:password name="password" key="labels.login.password"/>
+		<s:textfield name="username" key="login.username"/>
+		<s:password name="password" key="login.password"/>
 		
 		<s:submit name="submit" key="buttons.login"/>
 		<s:submit name="submit" key="buttons.register" action="inputRegister"/>

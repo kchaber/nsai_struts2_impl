@@ -3,7 +3,7 @@
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 
 
-<span><s:text name="labels.other.appendStrings" /></span>
+<span><s:text name="other.appendStrings" /></span>
 <br />
 
 <s:actionerror />
@@ -14,7 +14,7 @@
 </s:iterator>
 
 <%-- the new string to add --%>
-<s:textfield name="someString" key="labels.other.someString" />
+<s:textfield name="someString" key="other.someString" />
 
 <%-- an URL to the action responsible for add string to the list --%>
 <s:url id="addStringUrl" action="addStringAjaxAction" />

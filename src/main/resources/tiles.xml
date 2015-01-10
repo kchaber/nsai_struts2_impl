@@ -30,4 +30,11 @@
 	<definition name="OtherViewDef" extends="baseLayoutWithMenu">
 		<put-attribute name="body" value="/views/OtherView.jsp" />
 	</definition>
+	
+	<definition name="ParkingDef" extends="baseLayoutWithMenu">
+		<put-attribute name="body" value="/views/parkings/Parking.jsp" />
+	</definition>
+	<definition name="ParkingsListDef" extends="baseLayoutWithMenu">
+		<put-attribute name="body" value="/views/parkings/ParkingsList.jsp" />
+	</definition>
 </tiles-definitions>

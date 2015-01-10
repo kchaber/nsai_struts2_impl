@@ -1,7 +1,13 @@
 package pl.dmcs.nsai.struts2.entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -9,21 +15,34 @@ import javax.persistence.Table;
 public class ParkingData extends AbstractEntity {
 	private static final long serialVersionUID = -8635031445997751456L;
 
+	public static final Integer MAX_CAPACITY = 50;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Integer id;
+	
 	@Column(nullable = false, length = 50)
 	private String name;
 
+	@Column(nullable = false, length = 100)
+	private String streetName;
+	
 	@Column(nullable = false)
-	private Double posX;
+	private Integer capacity;
+	
+	@OneToMany(mappedBy = "parkingData")
+	private Set<ParkingPlaceData> places;
 
-	@Column(nullable = false)
-	private Double posY;
+	@Override
+	public Integer getId() {
+		return this.id;
+	}
 
-	@Column(nullable = false)
-	private Double width;
-
-	@Column(nullable = false)
-	private Double height;
-
+	@Override
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -32,35 +51,27 @@ public class ParkingData extends AbstractEntity {
 		this.name = name;
 	}
 
-	public Double getPosX() {
-		return posX;
+	public String getStreetName() {
+		return streetName;
 	}
 
-	public void setPosX(Double posX) {
-		this.posX = posX;
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
 	}
 
-	public Double getPosY() {
-		return posY;
+	public Set<ParkingPlaceData> getPlaces() {
+		return places;
 	}
 
-	public void setPosY(Double posY) {
-		this.posY = posY;
+	public void setPlaces(Set<ParkingPlaceData> places) {
+		this.places = places;
 	}
 
-	public Double getWidth() {
-		return width;
+	public Integer getCapacity() {
+		return capacity;
 	}
 
-	public void setWidth(Double width) {
-		this.width = width;
-	}
-
-	public Double getHeight() {
-		return height;
-	}
-
-	public void setHeight(Double height) {
-		this.height = height;
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
 	}
 }

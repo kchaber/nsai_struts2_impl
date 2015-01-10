@@ -1,20 +1,19 @@
-package pl.dmcs.nsai.struts2.actions;
+package pl.dmcs.nsai.struts2.actions.login;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import pl.dmcs.nsai.struts2.actions.AbstractAction;
 import pl.dmcs.nsai.struts2.services.ParkingService;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * The example login action using XML based configuration
  * @author KCH, JB
  *
  */
-public class LoginAction extends ActionSupport implements SessionAware {
+public class LoginAction extends AbstractAction implements SessionAware {
 	private static final long serialVersionUID = -367541240516039861L;
 	
 	/**
