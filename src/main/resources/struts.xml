@@ -74,12 +74,24 @@
 
 		<action name="*Parking" class="pl.dmcs.nsai.struts2.actions.parking.ParkingsAction" method="{1}">
 			<interceptor-ref name="nsaiDefaultStack">
-				<param name="scope.session">selectedId,parkingData</param>
+				<param name="scope.key">PARKINGS</param>
+				<param name="scope.session">parkingData</param>
 			</interceptor-ref>
 
 			<result name="input" type="tiles">ParkingDef</result>
 			<result name="success" type="tiles">ParkingDef</result>
 			<result name="list" type="tiles">ParkingsListDef</result>
+			<result name="parkingPlacesReservation" type="tiles">ParkingPlacesListDef</result>
+		</action>
+		
+		<action name="*PlaceReservation" class="pl.dmcs.nsai.struts2.actions.parking.ParkingPlaceReservationAction" method="{1}">
+			<interceptor-ref name="nsaiDefaultStack">
+				<param name="scope.key">PARKINGS</param>
+				<param name="scope.session">parkingPlaceReservationData,parkingData</param>
+			</interceptor-ref>
+
+			<result name="input" type="tiles">ParkingPlacesListDef</result>
+			<result name="success" type="tiles">ParkingPlacesListDef</result>
 		</action>
 
 		<action name="*User" class="pl.dmcs.nsai.struts2.actions.user.UsersAction" method="{1}">

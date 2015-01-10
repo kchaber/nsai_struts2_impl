@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import pl.dmcs.nsai.struts2.actions.AbstractAction;
+import pl.dmcs.nsai.struts2.entities.UserData;
 import pl.dmcs.nsai.struts2.services.UserService;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
@@ -38,14 +39,14 @@ public class LoginAction extends AbstractAction implements SessionAware {
 		}
 	)
 	public String login() throws Exception {
-		boolean cretentialsOk = this.userService.loginUser(this.username, this.password);
-		if (!cretentialsOk) {
+		UserData loggedUser = this.userService.loginUser(this.username, this.password);
+		if (loggedUser == null) {
 			this.addFieldError("username", getText("erorrs.loginFailed"));
 			return INPUT;
 		}
 		
 		//put the username to the session parameter
-		this.session.put(USER_CONTEXT_PARAM_NAME, this.username);
+		this.session.put(USER_CONTEXT_PARAM_NAME, loggedUser);
 		
 		return SUCCESS;
 	}

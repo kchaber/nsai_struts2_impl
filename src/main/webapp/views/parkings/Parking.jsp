@@ -8,20 +8,23 @@
 		</s:if>
 		<s:textfield name="parkingData.name" key="parkingData.name" />
 		<s:textfield name="parkingData.streetName" key="parkingData.streetName" />
-		<s:textfield name="parkingData.capacity" key="parkingData.capacity" disabled="%{parkingData.aggregateBookedPlacesSize > 0}"/>
-		
+		<s:textfield name="parkingData.capacity" key="parkingData.capacity" disabled="%{parkingData.aggregateBookedPlacesSize > 0}" />
+
 		<div id="actions">
 			<s:submit type="button" method="save" key="buttons.save" theme="simple">
 
+			</s:submit>
+			<s:submit type="button" action="listParking" key="buttons.cancel" theme="simple">
+				Cancel
 			</s:submit>
 			<s:if test="%{parkingData.id != null}">
 				<s:submit type="button" method="delete" key="buttons.delete" theme="simple">
 					Delete
 				</s:submit>
+				<s:submit type="button" action="inputPlaceReservation" key="buttons.cancel" theme="simple">
+					Book place
+				</s:submit>
 			</s:if>
-			<s:submit type="button" action="listParking" key="buttons.cancel" theme="simple">
-				Cancel
-			</s:submit>
 		</div>
 	</s:form>
 </div>

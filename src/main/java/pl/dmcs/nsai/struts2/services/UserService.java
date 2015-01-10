@@ -34,13 +34,13 @@ public class UserService {
 		return this.userDAO.findByLogin(login);
 	}
 	
-	public boolean loginUser(String login, String password) {
+	public UserData loginUser(String login, String password) {
 		UserData user = this.userDAO.findByLogin(login);
 		
 		if (user != null && !StringUtils.isEmpty(password) && password.equals(user.getPasswordEncrypted())) {
-			return true;
+			return user;
 		}
 		
-		return false;
+		return null;
 	}
 }
