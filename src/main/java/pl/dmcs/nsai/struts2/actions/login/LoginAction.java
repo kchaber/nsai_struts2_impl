@@ -6,7 +6,10 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import pl.dmcs.nsai.struts2.actions.AbstractAction;
-import pl.dmcs.nsai.struts2.services.ParkingService;
+import pl.dmcs.nsai.struts2.services.UserService;
+
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
 
 /**
  * The example login action using XML based configuration
@@ -26,15 +29,27 @@ public class LoginAction extends AbstractAction implements SessionAware {
 	
 	private Map<String, Object> session = new HashMap<>();
 	
-	private ParkingService parkingService;
+	private UserService userService;
 	
+	@Validations(
+		requiredStrings = { 
+			@RequiredStringValidator(fieldName = "username", key = "${getRequiredFieldMessage(fieldName)}", shortCircuit = true),
+			@RequiredStringValidator(fieldName = "password", key = "${getRequiredFieldMessage(fieldName)}", shortCircuit = true)
+		}
+	)
 	public String login() throws Exception {
+		boolean cretentialsOk = this.userService.loginUser(this.username, this.password);
+		if (!cretentialsOk) {
+			this.addFieldError("username", getText("erorrs.loginFailed"));
+			return INPUT;
+		}
+		
 		//put the username to the session parameter
 		this.session.put(USER_CONTEXT_PARAM_NAME, this.username);
 		
 		return SUCCESS;
 	}
-
+	
 	public String getUsername() {
 		return username;
 	}
@@ -56,11 +71,11 @@ public class LoginAction extends AbstractAction implements SessionAware {
 		this.session = session;
 	}
 
-	public ParkingService getParkingService() {
-		return parkingService;
+	public UserService getUserService() {
+		return userService;
 	}
 
-	public void setParkingService(ParkingService parkingService) {
-		this.parkingService = parkingService;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 }

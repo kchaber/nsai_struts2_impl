@@ -8,7 +8,7 @@
 		</s:if>
 		<s:textfield name="parkingData.name" key="parkingData.name" />
 		<s:textfield name="parkingData.streetName" key="parkingData.streetName" />
-		<s:textfield name="parkingData.capacity" key="parkingData.capacity" />
+		<s:textfield name="parkingData.capacity" key="parkingData.capacity" disabled="%{parkingData.aggregateBookedPlacesSize > 0}"/>
 		
 		<div id="actions">
 			<s:submit type="button" method="save" key="buttons.save" theme="simple">

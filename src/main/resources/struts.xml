@@ -7,7 +7,7 @@
 	<constant name="struts.custom.i18n.resources" value="MessageResources" />
 	<constant name="struts.mapper.action.prefix.enabled" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
-	<constant name="struts.ui.theme" value="css_xhtml"/>
+	<constant name="struts.ui.theme" value="css_xhtml" />
 
 	<package name="struts-2-nsai" namespace="/" extends="struts-default">
 		<result-types>
@@ -44,6 +44,11 @@
 			<result name="success" type="tiles">WelcomeDef</result>
 		</action>
 
+		<action name="*Register" class="pl.dmcs.nsai.struts2.actions.login.RegisterAction" method="{1}">
+			<result name="input" type="tiles">RegisterDef</result>
+			<result name="success" type="tiles">LoginDef</result>
+		</action>
+
 		<!-- Some other action mapping -->
 		<action name="*OtherAction" class="pl.dmcs.nsai.struts2.actions.OtherAction" method="{1}">
 			<result name="input" type="tiles">OtherViewDef</result>
@@ -66,16 +71,24 @@
 		<action name="locale" class="pl.dmcs.nsai.struts2.actions.LocaleAction" method="execute">
 			<result name="success" type="tiles">LoginDef</result>
 		</action>
-		
+
 		<action name="*Parking" class="pl.dmcs.nsai.struts2.actions.parking.ParkingsAction" method="{1}">
 			<interceptor-ref name="nsaiDefaultStack">
 				<param name="scope.session">selectedId,parkingData</param>
 			</interceptor-ref>
-		
+
 			<result name="input" type="tiles">ParkingDef</result>
 			<result name="success" type="tiles">ParkingDef</result>
 			<result name="list" type="tiles">ParkingsListDef</result>
 		</action>
 
+		<action name="*User" class="pl.dmcs.nsai.struts2.actions.user.UsersAction" method="{1}">
+			<interceptor-ref name="nsaiDefaultStack">
+				<param name="scope.session">selectedId,userData</param>
+			</interceptor-ref>
+			<result name="input" type="tiles">UserDef</result>
+			<result name="success" type="tiles">UserDef</result>
+			<result name="list" type="tiles">UsersListDef</result>
+		</action>
 	</package>
 </struts>

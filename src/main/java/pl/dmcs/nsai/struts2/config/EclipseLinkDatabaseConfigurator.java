@@ -32,7 +32,7 @@ public class EclipseLinkDatabaseConfigurator {
 		Properties properties = new Properties();
         properties.setProperty("eclipselink.logging.level", "fine");
         properties.setProperty("eclipselink.weaving", "false");
-        properties.setProperty("eclipselink.ddl-generation", "drop-and-create-tables");
+        properties.setProperty("eclipselink.ddl-generation", "create-or-extend-tables");
         
         return properties;
 	}

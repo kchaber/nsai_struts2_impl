@@ -1,71 +1,56 @@
 package pl.dmcs.nsai.struts2.actions.login;
 
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
-import org.apache.struts2.interceptor.validation.SkipValidation;
+import pl.dmcs.nsai.struts2.actions.user.UsersAction;
+import pl.dmcs.nsai.struts2.entities.UserData;
 
-import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.ExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 
-@ParentPackage("struts-2-nsai")
-@Namespace("/")
-@Results({ 
-	@Result(name = "input", type = "tiles", location = "RegisterDef"),
-	@Result(name = "success", type = "tiles", location = "LoginDef")
-})
-@Action("*Register")
-@Validations(
-		expressions = {
-			@ExpressionValidator(expression = "password eq passwordConfirm", message = "${getText('register.invalidpasswordConfirm')}")
-		}
-)
-public class RegisterAction extends ActionSupport {
-	private static final long serialVersionUID = -87122263505775714L;
-
-	private String username;
-	private String password;
+public class RegisterAction extends UsersAction {
+	private static final long serialVersionUID = 4015831356927099023L;
+	
 	private String passwordConfirm;
 	
-	@Override
-	@SkipValidation
-	public String execute() throws Exception {
-		super.execute();
-		return INPUT;
-	}
-	
-	@Action("registerRegister")
+	@Validations(
+		requiredStrings = { 
+			@RequiredStringValidator(fieldName = "userData.login", key = "${getRequiredFieldMessage(fieldName)}", shortCircuit = true),
+			@RequiredStringValidator(fieldName = "userData.firstName", key = "${getRequiredFieldMessage(fieldName)}", shortCircuit = true),
+			@RequiredStringValidator(fieldName = "userData.lastName", key = "${getRequiredFieldMessage(fieldName)}", shortCircuit = true),
+			@RequiredStringValidator(fieldName = "userData.passwordEncrypted", key = "${getRequiredFieldMessage(fieldName)}", shortCircuit = true),
+			@RequiredStringValidator(fieldName = "passwordConfirm", key = "${getRequiredFieldMessage(fieldName)}", shortCircuit = true),
+			@RequiredStringValidator(fieldName = "userData.email", key = "${getRequiredFieldMessage(fieldName)}", shortCircuit = true)
+		},
+		expressions = {
+			@ExpressionValidator(expression = "userData.passwordEncrypted eq passwordConfirm", message = "${getText('errors.invalidpasswordConfirm')}", shortCircuit = true)
+		},
+		emails = {
+			@EmailValidator(fieldName = "userData.email", key = "${getInvalidEmailFieldMessage(fieldName)}")
+		}
+	)
 	public String register() throws Exception {
+		UserData user = this.userService.findByLogin(this.getUserData().getLogin());
+		if (user != null) {
+			this.addFieldError("userData.login", getText("errors.loginExists"));
+			return INPUT;
+		}
+		
+		this.userService.save(this.managedEntity);
+		
 		return SUCCESS;
 	}
 
-	public String getUsername() {
-		return username;
+	@Override
+	protected void reset() {
+		super.reset();
+		this.passwordConfirm = null;
 	}
-
-	@RequiredStringValidator(message = "${getText('errors.required', new java.lang.String[]{fieldName})}")
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	@RequiredStringValidator(message = "${getText('errors.required', new java.lang.String[]{fieldName})}")
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+	
 	public String getPasswordConfirm() {
 		return passwordConfirm;
 	}
 
-	@RequiredStringValidator(message = "${getText('errors.required', new java.lang.String[]{fieldName})}", shortCircuit = true)
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
 	}

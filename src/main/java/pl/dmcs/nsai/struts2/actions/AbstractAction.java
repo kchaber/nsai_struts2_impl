@@ -25,6 +25,10 @@ public abstract class AbstractAction extends ActionSupport implements ServletReq
 	public String getFieldRangeExceededMessage(String fieldName, int min, int max) {
 		return this.getText("errors.rangeExceeded", new String[] {this.getText(fieldName, fieldName), String.valueOf(min), String.valueOf(max)});
 	}
+	
+	public String getInvalidEmailFieldMessage(String fieldName) {
+		return this.getText("errors.invalidEmail", new String[] {this.getText(fieldName, fieldName)});
+	}
 
 	public String getActionName() {
 		return ActionContext.getContext().getName();

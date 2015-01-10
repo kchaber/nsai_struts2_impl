@@ -24,7 +24,7 @@ public class ParkingPlaceData extends AbstractEntity {
 	@Column(length = 1)
 	private Boolean free = true;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private ParkingData parkingData;
 
 	@Override

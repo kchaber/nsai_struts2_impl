@@ -29,11 +29,8 @@ public class ParkingsAction extends AbstractCRUDAction<ParkingData> {
 		intRangeFields = {
 			@IntRangeFieldValidator(fieldName = "parkingData.capacity", key = "${getFieldRangeExceededMessage(fieldName, min, max)}", min = "0", max = "50", shortCircuit = true)
 		}
-		
 	)
 	public String save() throws Exception {
-		System.out.println("programsAction entered");
-
 		this.managedEntity = parkingService.save(this.managedEntity);
 
 		return SUCCESS;
@@ -46,6 +43,7 @@ public class ParkingsAction extends AbstractCRUDAction<ParkingData> {
 	
 	@Override
 	protected void reset() {
+		super.reset();
 		this.managedEntity = new ParkingData();
 	}
 

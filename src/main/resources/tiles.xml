@@ -37,4 +37,11 @@
 	<definition name="ParkingsListDef" extends="baseLayoutWithMenu">
 		<put-attribute name="body" value="/views/parkings/ParkingsList.jsp" />
 	</definition>
+	
+	<definition name="UserDef" extends="baseLayoutWithMenu">
+		<put-attribute name="body" value="/views/users/User.jsp" />
+	</definition>
+	<definition name="UsersListDef" extends="baseLayoutWithMenu">
+		<put-attribute name="body" value="/views/users/UsersList.jsp" />
+	</definition>
 </tiles-definitions>

@@ -6,5 +6,6 @@
 	<s:form method="POST">
 		<s:submit action="testOtherAction" value="test other action"/>
 		<s:submit action="listParking" value="Parkings"/>
+		<s:submit action="listUser" value="Users"/>
 	</s:form>
 </div>

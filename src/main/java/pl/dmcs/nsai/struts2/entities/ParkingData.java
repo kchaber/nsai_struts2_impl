@@ -1,7 +1,9 @@
 package pl.dmcs.nsai.struts2.entities;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,22 +18,25 @@ public class ParkingData extends AbstractEntity {
 	private static final long serialVersionUID = -8635031445997751456L;
 
 	public static final Integer MAX_CAPACITY = 50;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
-	
+
 	@Column(nullable = false, length = 50)
 	private String name;
 
 	@Column(nullable = false, length = 100)
 	private String streetName;
-	
+
 	@Column(nullable = false)
 	private Integer capacity;
 	
-	@OneToMany(mappedBy = "parkingData")
-	private Set<ParkingPlaceData> places;
+	@Column
+	private Integer aggregateBookedPlacesSize;
+
+	@OneToMany(mappedBy = "parkingData", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ParkingPlaceData> places;
 
 	@Override
 	public Integer getId() {
@@ -42,7 +47,7 @@ public class ParkingData extends AbstractEntity {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -59,11 +64,19 @@ public class ParkingData extends AbstractEntity {
 		this.streetName = streetName;
 	}
 
-	public Set<ParkingPlaceData> getPlaces() {
-		return places;
+	public void addPlace(ParkingPlaceData place) {
+		place.setParkingData(this);
+		this.getPlaces().add(place);
+	}
+	
+	public List<ParkingPlaceData> getPlaces() {
+		if (this.places == null) {
+			this.places = new ArrayList<>();
+		}
+		return this.places;
 	}
 
-	public void setPlaces(Set<ParkingPlaceData> places) {
+	public void setPlaces(List<ParkingPlaceData> places) {
 		this.places = places;
 	}
 
@@ -73,5 +86,16 @@ public class ParkingData extends AbstractEntity {
 
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
+	}
+
+	public Integer getAggregateBookedPlacesSize() {
+		if (this.aggregateBookedPlacesSize == null) {
+			this.aggregateBookedPlacesSize = 0;
+		}
+		return aggregateBookedPlacesSize;
+	}
+
+	public void setAggregateBookedPlacesSize(Integer aggregateBookedPlacesSize) {
+		this.aggregateBookedPlacesSize = aggregateBookedPlacesSize;
 	}
 }

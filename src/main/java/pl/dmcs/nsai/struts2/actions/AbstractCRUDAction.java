@@ -7,6 +7,11 @@ public abstract class AbstractCRUDAction<ENTITY> extends AbstractAction {
 	protected Integer selectedId;
 	protected ENTITY managedEntity;
 	
+	public String input() {
+		this.reset();
+		return INPUT;
+	}
+	
 	public String create() {
 		this.reset();
 		return INPUT;
