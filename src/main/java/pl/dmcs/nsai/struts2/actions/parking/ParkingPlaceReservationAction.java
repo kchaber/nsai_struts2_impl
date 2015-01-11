@@ -1,8 +1,11 @@
 package pl.dmcs.nsai.struts2.actions.parking;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
+
+import org.springframework.util.StringUtils;
 
 import pl.dmcs.nsai.struts2.actions.AbstractCRUDAction;
 import pl.dmcs.nsai.struts2.entities.ParkingData;
@@ -20,6 +23,11 @@ public class ParkingPlaceReservationAction extends AbstractCRUDAction<ParkingPla
 	
 	private Set<ParkingPlaceReservationData> reservedPlaces = new HashSet<>();
 	
+	private String selectedParkingPlaceIndexesString;
+	private Set<ParkingPlaceData> selectedParkingPlaces;
+	
+	public static final String SELECTED_LIST_AJAX = "selectedListAjax";
+	
 	@Override
 	public ParkingPlaceReservationData loadManagedEntity(Integer id) {
 		return null;
@@ -29,6 +37,7 @@ public class ParkingPlaceReservationAction extends AbstractCRUDAction<ParkingPla
 	protected void reset() {
 		super.reset();
 		this.managedEntity = new ParkingPlaceReservationData();
+		this.setSelectedParkingPlaceIndexesString(null);
 	}
 	
 	public String input() {
@@ -40,14 +49,32 @@ public class ParkingPlaceReservationAction extends AbstractCRUDAction<ParkingPla
 	}
 	
 	public String listReserved() {
+		this.setSelectedParkingPlaceIndexesString(null);
 		this.reservedPlaces = this.parkingPlaceService.findByBookingDateAndParkingId(this.getParkingPlaceReservationData().getBookingDate(), this.getParkingData().getId());
 		
 		return SUCCESS;
 	}
 	
-	public String testCreate() {
-		Random r = new Random();
-		this.parkingPlaceService.createReservation(this.getLoggedUser(), parkingData.getPlaces().get(r.nextInt(parkingData.getPlaces().size())), this.managedEntity.getBookingDate());
+	public String ajaxListSelected() {
+		//when the action is called, than selectedParkingPlaceIds is populated automatically
+		return SELECTED_LIST_AJAX;
+	}
+	
+	public String save() {
+		if (this.selectedParkingPlaces.isEmpty()) {
+			this.addActionError(this.getText("actionErrors.noParkingPlaceSelected"));
+			return INPUT;
+		}
+		
+		for (ParkingPlaceData parkingPlace : this.selectedParkingPlaces) {
+			this.parkingPlaceService.createReservation(this.getLoggedUser(), parkingPlace, this.managedEntity.getBookingDate());
+		}
+		
+		this.setSelectedParkingPlaceIndexesString(null);
+		//reload reserved parking places
+		this.listReserved();
+		
+		this.addActionMessage(getText("actionMessages.operationSuccessful"));
 		
 		return SUCCESS;
 	}
@@ -59,6 +86,10 @@ public class ParkingPlaceReservationAction extends AbstractCRUDAction<ParkingPla
 		return this.reservedPlaces != null && this.reservedPlaces.contains(compared);
 	}
 
+	public Date getCurrentDate() {
+		return Calendar.getInstance().getTime();
+	}
+	
 	public ParkingPlaceReservationData getParkingPlaceReservationData() {
 		return this.managedEntity;
 	}
@@ -98,5 +129,29 @@ public class ParkingPlaceReservationAction extends AbstractCRUDAction<ParkingPla
 
 	public void setParkingData(ParkingData parkingData) {
 		this.parkingData = parkingData;
+	}
+
+	public String getSelectedParkingPlaceIndexesString() {
+		return selectedParkingPlaceIndexesString;
+	}
+	
+	public void setSelectedParkingPlaceIndexesString(String selectedParkingPlaceIndexesString) {
+		this.selectedParkingPlaces = new HashSet<>();
+		this.selectedParkingPlaceIndexesString = selectedParkingPlaceIndexesString;
+		if (!StringUtils.isEmpty(this.selectedParkingPlaceIndexesString)) {
+			String[] splittedIndexes = this.selectedParkingPlaceIndexesString.split(",");
+			for (String parkingPlaceStringIndex : splittedIndexes) {
+				ParkingPlaceData ppd = this.parkingData.getPlaces().get(Integer.valueOf(parkingPlaceStringIndex));
+				this.selectedParkingPlaces.add(ppd);
+			}
+		}
+	}
+
+	public Set<ParkingPlaceData> getSelectedParkingPlaces() {
+		return selectedParkingPlaces;
+	}
+
+	public void setSelectedParkingPlaces(Set<ParkingPlaceData> selectedParkingPlaces) {
+		this.selectedParkingPlaces = selectedParkingPlaces;
 	}
 }

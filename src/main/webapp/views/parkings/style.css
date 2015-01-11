@@ -1,0 +1,44 @@
+#parking-map-div {
+	background-image: url('../../images/parking_map.jpg') !important;
+	width: 1000px;
+	height: 650px;
+	margin-left: 40px;
+	position: relative;
+	height: 650px;
+	position: relative;
+	margin-bottom: 40px;
+}
+
+.parking-position {
+	position: absolute;
+	opacity: 0.6;
+	cursor: pointer;
+}
+
+.parking-position.available {
+	background-color: #48b427;
+}
+
+.parking-position.available:HOVER {
+	background-color: #49ff45;
+}
+
+.parking-position.booked {
+	background-color: #f80000;
+}
+
+.parking-position.booked:HOVER {
+	background-color: #ff4545;
+}
+
+.parking-position.selected {
+	background-color: #0266c8;
+}
+
+.parking-position.selected:HOVER {
+	background-color: #27b1bd;
+}
+
+.ui-datepicker-trigger {
+	display: none;
+}

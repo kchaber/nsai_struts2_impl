@@ -7,7 +7,8 @@
 	<constant name="struts.custom.i18n.resources" value="MessageResources" />
 	<constant name="struts.mapper.action.prefix.enabled" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
-	<constant name="struts.ui.theme" value="css_xhtml" />
+	<constant name="struts.ui.theme" value="custom_css_xhtml" />
+	<constant name="struts.ui.templateDir" value="template" />
 
 	<package name="struts-2-nsai" namespace="/" extends="struts-default">
 		<result-types>
@@ -87,11 +88,12 @@
 		<action name="*PlaceReservation" class="pl.dmcs.nsai.struts2.actions.parking.ParkingPlaceReservationAction" method="{1}">
 			<interceptor-ref name="nsaiDefaultStack">
 				<param name="scope.key">PARKINGS</param>
-				<param name="scope.session">parkingPlaceReservationData,parkingData</param>
+				<param name="scope.session">parkingPlaceReservationData,parkingData,reservedPlaces</param>
 			</interceptor-ref>
 
 			<result name="input" type="tiles">ParkingPlacesListDef</result>
 			<result name="success" type="tiles">ParkingPlacesListDef</result>
+			<result name="selectedListAjax">views/parkings/SelectedParkingPlacesList.jsp</result>
 		</action>
 
 		<action name="*User" class="pl.dmcs.nsai.struts2.actions.user.UsersAction" method="{1}">

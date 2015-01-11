@@ -34,6 +34,8 @@ public class ParkingsAction extends AbstractCRUDAction<ParkingData> {
 	public String save() throws Exception {
 		this.managedEntity = parkingService.save(this.managedEntity);
 
+		this.addActionMessage(getText("actionMessages.operationSuccessful"));
+		
 		return SUCCESS;
 	}
 

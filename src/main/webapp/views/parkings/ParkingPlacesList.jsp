@@ -2,43 +2,20 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 
-<style>
-#parking-map-div {
-	background-image: url('images/parking_map.jpg');
-	width: 1000px;
-	height: 650px;
-	position: relative;
-	margin-left: 50px;
-	height: 650px;
-	position: relative;
-}
+<link rel="stylesheet" href="views/parkings/style.css">
 
-.parking-position {
-	position: absolute;
-	opacity: 0.6;
-	cursor: pointer;
-}
+<div class="col-sm-12">
+	<s:form id="parkingplace-reservation-form" action="inputPlaceReservation" method="POST" cssClass="well">
+		<s:hidden name="selectedParkingPlaceIndexesString" id="selectedParkingPlaceIndexesStringHidden" />
 
-.parking-position.available {
-	background-color: #48b427;
-}
+		<div class="form-group" style="margin-bottom: 20px;">
+			<label class="label-control" style="margin-left: 40px;"><s:text name="parkingPlaceReservationData.bookingDate" />:</label>
+			<sj:datepicker parentTheme="xhtml" cssClass="form-control" buttonImageOnly="true" cssStyle="margin-left: 40px; width: 100px;" name="parkingPlaceReservationData.bookingDate"
+				onchange="reloadReservations();" minDate="%{getCurrentDate()}" />
+		</div>
 
-.parking-position.available:HOVER {
-	background-color: #49ff45;
-}
-
-.parking-position.booked {
-	background-color: #ff8100;
-}
-
-.parking-position.booked:HOVER {
-	background-color: #f2b50f;
-}
-</style>
-
-<div>
-	<s:form id="parkingPlaceReservationForm" action="reservePlaceParking" method="POST">
-		<sj:datepicker name="parkingPlaceReservationData.bookingDate" />
+		<label class="label-control" style="margin-left: 40px;"><s:text name="parkingPlaceReservationData.title" />:</label>
+		<div id="selected-parking-places-div" style="margin-bottom: 20px; margin-left: 40px;"></div>
 
 		<s:set var="baseWidth" value="50" />
 		<s:set var="baseHeight" value="70" />
@@ -73,22 +50,68 @@
 					<s:set var="currX" value="%{270 + #localIndex * (#baseWidth + 12)}" />
 					<s:set var="currY" value="545" />
 				</s:elseif>
-				<s:set var="classes" value="'parking-position'" />
+
+
+				<s:set var="positions" value="%{'margin-left: ' + #currX + 'px; margin-top: ' + #currY + 'px; width: ' + #baseWidth + 'px; height: ' + #baseHeight + 'px;'}" />
 				<s:if test="%{isPlaceReserved(#parkingPlace)}">
-					<s:set var="classes" value="%{#classes + ' booked'}" />
+					<div parking-place-index='<s:property value="#it.index"/>' class="parking-position booked" style="<s:property value='%{#positions}'/>" title="ALREADY RESERVED">
+						<s:property value="#parkingPlace.orderNum" />
+					</div>
 				</s:if>
 				<s:else>
-					<s:set var="classes" value="%{#classes + ' available'}" />
+					<div parking-place-index='<s:property value="#it.index"/>' class="parking-position available" style="<s:property value='%{#positions}'/>" onclick="toggleSelectParkingPlace($(this));">
+						<s:property value="#parkingPlace.orderNum" />
+					</div>
 				</s:else>
-				<s:set var="positions" value="%{'margin-left: ' + #currX + 'px; margin-top: ' + #currY + 'px; width: ' + #baseWidth + 'px; height: ' + #baseHeight + 'px;'}" />
-
-				<div class="<s:property value='%{#classes}'/>" style="<s:property value='%{#positions}'/>"></div>
 			</s:iterator>
 		</div>
 
-		<s:submit type="button" action="testCreatePlaceReservation" key="buttons.save" theme="simple">
-					TEST
-		</s:submit>
+		<s:url var="listSelectedParkingPlacesUrl" action="ajaxListSelectedPlaceReservation" />
+		<sj:submit id="listSelectedParkingPlacesButton" formIds="parkingplace-reservation-form" targets="selected-parking-places-div" href="%{#listSelectedParkingPlacesUrl}" cssStyle="display: none;" />
 
+		<s:submit id="reloadReservationsButton" type="button" action="listReservedPlaceReservation" theme="simple" cssStyle="display: none;" />
+
+		<div class="form-group form-actions text-right">
+			<s:submit id="createReservationsButton" type="button" action="savePlaceReservation" key="buttons.save" theme="simple" cssClass="btn btn-primary" />
+			<s:a action="modifyParking" theme="simple" cssClass="btn btn-xs btn-default"><s:text name="buttons.back"/></s:a>
+		</div>
 	</s:form>
 </div>
+<script>
+	function reloadReservations() {
+		$("#reloadReservationsButton").click();
+	}
+
+	function toggleSelectParkingPlace(parkingPlaceDiv) {
+		parkingPlaceDiv.toggleClass("available");
+		parkingPlaceDiv.toggleClass("selected");
+
+		collectSelectedParkingPlaces();
+		$("#listSelectedParkingPlacesButton").click();
+	}
+
+	function collectSelectedParkingPlaces() {
+		var ids = "";
+		$(".selected").each(function() {
+			ids += $(this).attr("parking-place-index") + ",";
+		});
+		$("#selectedParkingPlaceIndexesStringHidden").val(ids);
+	}
+
+	//WORKAROUND FOR THE JQUERY SUBMIT BUTTON
+	$(document).ready(function() {
+		$("#reloadReservationsButton").click(function(e) {
+			e.preventDefault();
+			this.form.action = "listReservedPlaceReservation";
+			this.form.submit();
+		});
+
+		$("#createReservationsButton").click(function(e) {
+			e.preventDefault();
+			this.form.action = "savePlaceReservation";
+			this.form.submit();
+		});
+	});
+
+	
+</script>

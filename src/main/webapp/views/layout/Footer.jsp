@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div>
-	<span style="text-align: center;margin-left: 45%;color: white"><s:text name="footer.example"/></span>
+<hr/>
+
+<div class="col-sm-6 col-sm-offset-3">
+	<span class="col-sm-6 text-left"><s:text name="footer.msgRights" /></span>
+	<span class="col-sm-6 text-right"><s:text name="footer.msgCopyright" /></span>
 </div>

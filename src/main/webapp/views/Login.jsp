@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%-- INCLUDE IT TO HAVE ACCESS TO THE STRUTS 2 TAGS --%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div>
-	<s:actionerror/>
+<div class="col-sm-4 col-sm-offset-4">
+	<h2><s:text name="login.title"/></h2>
 
-	<s:form method="POST" action="loginLogin">
-		<s:textfield name="username" key="login.username"/>
-		<s:password name="password" key="login.password"/>
-		
-		<s:submit name="submit" key="buttons.login"/>
-		<s:submit name="submit" key="buttons.register" action="inputRegister"/>
+	<s:form method="POST" action="loginLogin" cssClass="well">
+		<s:textfield name="username" key="login.username" cssClass="form-control" />
+		<s:password name="password" key="login.password" cssClass="form-control" />
+
+		<div class="form-group form-actions text-right">
+			<s:submit name="submit" key="buttons.login" cssClass="btn btn-primary" theme="simple" />
+			<s:submit name="submit" key="buttons.register" action="inputRegister" cssClass="btn btn-default" theme="simple" />
+		</div>
 	</s:form>
 </div>

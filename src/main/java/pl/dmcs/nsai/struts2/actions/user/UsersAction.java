@@ -32,6 +32,8 @@ public class UsersAction extends AbstractCRUDAction<UserData> {
 	public String save() throws Exception {
 		this.managedEntity = userService.save(this.managedEntity);
 
+		this.addActionMessage(getText("actionMessages.operationSuccessful"));
+		
 		return SUCCESS;
 	}
 

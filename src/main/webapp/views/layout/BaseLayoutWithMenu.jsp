@@ -5,26 +5,24 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" type="text/css" href="views/layout/layout.css">
-		
-		<script type="text/javascript" src="scripts/jquery-2.1.3.min.js"></script>
+		<%@include file="CommonIncludes.jsp" %>
 		
 		<title>Struts 2 NSAI</title>
 	</head>
 	<body>
-		<div id="app-header">
+		<div id="app-header" class="navbar navbar-default">
 			<tiles:insertAttribute name="header" />
-		</div>
-		
-		<div id="app-top-menu">
 			<tiles:insertAttribute name="topMenu" />
 		</div>
-
-		<div id="app-body">
+		
+		<div id="app-body" class="container">
+			<s:actionmessage/>
+			<s:actionerror/>
+		
 			<tiles:insertAttribute name="body" />
 		</div>
 
-		<div id="app-footer">
+		<div id="app-footer"  class="footer" style="margin-top: 120px;height: 80px;">
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</body>
