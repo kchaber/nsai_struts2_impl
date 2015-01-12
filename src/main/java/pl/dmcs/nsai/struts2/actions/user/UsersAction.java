@@ -48,12 +48,20 @@ public class UsersAction extends AbstractCRUDAction<UserData> {
 		this.managedEntity = new UserData();
 	}
 
+	@Override
 	public String list() {
 		this.usersList = this.userService.findAll();
 
 		return LIST;
 	}
 
+	@Override
+	public void removeManagedEntity(Integer id) {
+		if (this.getLoggedUser() != null && !id.equals(this.getLoggedUser().getId())) {
+			this.userService.remove(id);
+		}
+	}
+	
 	public UserData getUserData() {
 		return this.managedEntity;
 	}

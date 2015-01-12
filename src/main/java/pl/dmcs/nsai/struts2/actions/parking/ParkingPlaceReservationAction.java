@@ -1,7 +1,5 @@
 package pl.dmcs.nsai.struts2.actions.parking;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -79,6 +77,11 @@ public class ParkingPlaceReservationAction extends AbstractCRUDAction<ParkingPla
 		return SUCCESS;
 	}
 	
+	@Override
+	public void removeManagedEntity(Integer id) {
+
+	}
+	
 	public boolean isPlaceReserved(ParkingPlaceData parkingPlaceData) {
 		ParkingPlaceReservationData compared = new ParkingPlaceReservationData();
 		compared.setParkingPlaceData(parkingPlaceData);
@@ -86,10 +89,6 @@ public class ParkingPlaceReservationAction extends AbstractCRUDAction<ParkingPla
 		return this.reservedPlaces != null && this.reservedPlaces.contains(compared);
 	}
 
-	public Date getCurrentDate() {
-		return Calendar.getInstance().getTime();
-	}
-	
 	public ParkingPlaceReservationData getParkingPlaceReservationData() {
 		return this.managedEntity;
 	}

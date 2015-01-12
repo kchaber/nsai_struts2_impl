@@ -2,6 +2,10 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div class="col-sm-6 col-sm-offset-3">
+	<h2>
+		<s:text name="user.title" /><br/>
+	</h2>
+
 	<s:form id="userForm" action="saveUser" method="POST" cssClass="well">
 		<s:if test="%{userData.id != null}">
 			<s:textfield name="userData.id" key="userData.id" disabled="true" cssClass="form-control"/>
@@ -15,8 +19,13 @@
 			<s:submit type="button" method="save" key="buttons.save" theme="simple" cssClass="btn btn-primary">
 
 			</s:submit>
-			<s:if test="%{userData.id != null}">
-				<s:submit type="button" method="delete" key="buttons.delete" theme="simple" cssClass="btn btn-danger"/>
+			<s:if test="%{userData.id != null && !userData.equals(getLoggedUser())}">
+				<s:url var="deleteUserUrl" action="removeUser">
+					<s:param name="selectedId" value="%{userData.id}" />
+				</s:url>
+				<s:a href="%{#deleteUserUrl}" theme="simple" cssClass="btn btn-danger">
+					<s:text name="buttons.delete" />
+				</s:a>
 			</s:if>
 			<s:a action="listUser" theme="simple" cssClass="btn btn-xs btn-default"><s:text name="buttons.back"/></s:a>
 		</div>

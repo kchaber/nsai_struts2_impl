@@ -19,8 +19,23 @@ public abstract class AbstractCRUDAction<ENTITY> extends AbstractAction {
 		
 		return INPUT;
 	}
+	
+	public String remove() {
+		if (this.selectedId != null) {
+			this.removeManagedEntity(this.selectedId);
+			
+			this.addActionMessage(getText("actionMessages.successfulRemoval"));
+		}
+		
+		return this.list();
+	}
+	
+	public String list() {
+		return LIST;
+	}
 
 	public abstract ENTITY loadManagedEntity(Integer id);
+	public abstract void removeManagedEntity(Integer id);
 	
 	public Integer getSelectedId() {
 		return selectedId;

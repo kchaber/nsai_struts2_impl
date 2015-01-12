@@ -3,6 +3,10 @@
 <%@ taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <div class="col-sm-12">
+	<h2>
+		<s:text name="parkingsList.title" /><br/>
+	</h2>
+
 	<div id="actions" class="btn-group" style="margin-bottom: 20px;">
 		<a class="btn btn-primary" href="<s:url value="/createParking"/>"> 
 			<i class="icon-plus icon-white"></i> <s:text name="buttons.add"/>

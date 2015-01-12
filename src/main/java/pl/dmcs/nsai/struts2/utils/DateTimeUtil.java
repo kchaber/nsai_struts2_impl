@@ -42,4 +42,17 @@ public class DateTimeUtil {
         cal.set(Calendar.MILLISECOND, 0);
         return cal.getTime();
     }
+	
+	public static Date getOneDayBefore(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.DAY_OF_YEAR,-1);
+        return cal.getTime();
+    }
+	
+	public static Date getCurrentDate() {
+		return Calendar.getInstance().getTime();
+	}
+	
+	
 }

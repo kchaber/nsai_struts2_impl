@@ -31,7 +31,7 @@ public class ParkingPlaceReservationData extends AbstractEntity {
 	private ParkingPlaceData parkingPlaceData;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	private UserData UserData;
+	private UserData userData;
 
 	@Override
 	public Integer getId() {
@@ -89,10 +89,10 @@ public class ParkingPlaceReservationData extends AbstractEntity {
 	}
 
 	public UserData getUserData() {
-		return UserData;
+		return userData;
 	}
 
 	public void setUserData(UserData userData) {
-		UserData = userData;
+		this.userData = userData;
 	}
 }

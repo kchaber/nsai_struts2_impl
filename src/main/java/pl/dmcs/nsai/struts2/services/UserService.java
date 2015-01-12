@@ -22,6 +22,10 @@ public class UserService {
 		return entity;
 	}
 
+	public void remove(Integer userId) {
+		this.userDAO.delete(userId);
+	}
+	
 	public List<UserData> findAll() {
 		return CollectionUtil.iterableToList(this.userDAO.findAll());
 	}

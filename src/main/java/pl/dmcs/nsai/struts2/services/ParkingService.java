@@ -45,8 +45,8 @@ public class ParkingService {
 		}
 	}
 
-	public void delete(ParkingData entity) {
-		parkingDAO.delete(entity);
+	public void remove(Integer parkingId) {
+		parkingDAO.delete(parkingId);
 	}
 
 	public List<ParkingData> findAll() {

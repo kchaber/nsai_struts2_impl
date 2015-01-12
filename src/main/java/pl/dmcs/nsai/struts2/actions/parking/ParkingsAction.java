@@ -50,10 +50,16 @@ public class ParkingsAction extends AbstractCRUDAction<ParkingData> {
 		this.managedEntity = new ParkingData();
 	}
 
+	@Override
 	public String list() {
 		this.parkingsList = this.parkingService.findAll();
 
 		return LIST;
+	}
+	
+	@Override
+	public void removeManagedEntity(Integer id) {
+		this.parkingService.remove(id);
 	}
 
 	public ParkingData getParkingData() {

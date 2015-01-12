@@ -3,7 +3,13 @@
 
 <div class="navbar-header">
 	<s:form method="POST">
-		<s:a action="listParking" theme="simple" cssClass="navbar-link navbar-brand">Parkings</s:a>
-		<s:a action="listUser" theme="simple" cssClass="navbar-link navbar-brand">Users</s:a>
+		<s:a action="listParking" theme="simple" cssClass="navbar-link navbar-brand"><s:text name="menu.parkings.title"/></s:a>
+		<s:a action="listUser" theme="simple" cssClass="navbar-link navbar-brand"><s:text name="menu.users.title"/></s:a>
+
+		<s:if test="%{getLoggedUser() != null}">
+			<s:a action="listUserReservation" theme="simple" cssClass="navbar-link navbar-brand">
+				<s:text name="menu.myReservations.title" />
+			</s:a>
+		</s:if>
 	</s:form>
 </div>

@@ -1,5 +1,7 @@
 package pl.dmcs.nsai.struts2.actions;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +10,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import pl.dmcs.nsai.struts2.actions.login.LoginAction;
 import pl.dmcs.nsai.struts2.entities.UserData;
+import pl.dmcs.nsai.struts2.utils.DateTimeUtil;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -35,6 +38,10 @@ public abstract class AbstractAction extends ActionSupport implements ServletReq
 
 	public String getActionName() {
 		return ActionContext.getContext().getName();
+	}
+	
+	public Date getCurrentDate() {
+		return DateTimeUtil.getCurrentDate();
 	}
 	
 	protected void reset() {

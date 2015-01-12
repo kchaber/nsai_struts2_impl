@@ -51,6 +51,12 @@ public class LoginAction extends AbstractAction implements SessionAware {
 		return SUCCESS;
 	}
 	
+	public String logout() {
+		this.getRequest().getSession().invalidate();
+		
+		return INPUT;
+	}
+	
 	public String getUsername() {
 		return username;
 	}

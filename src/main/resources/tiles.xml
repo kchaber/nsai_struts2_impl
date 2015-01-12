@@ -23,14 +23,6 @@
 		<put-attribute name="body" value="/views/Register.jsp" />
 	</definition>
 	
-	<definition name="WelcomeDef" extends="baseLayoutWithMenu">
-		<put-attribute name="body" value="/views/Welcome.jsp" />
-	</definition>
-	
-	<definition name="OtherViewDef" extends="baseLayoutWithMenu">
-		<put-attribute name="body" value="/views/OtherView.jsp" />
-	</definition>
-	
 	<definition name="ParkingDef" extends="baseLayoutWithMenu">
 		<put-attribute name="body" value="/views/parkings/Parking.jsp" />
 	</definition>
@@ -46,5 +38,9 @@
 	</definition>
 	<definition name="UsersListDef" extends="baseLayoutWithMenu">
 		<put-attribute name="body" value="/views/users/UsersList.jsp" />
+	</definition>
+	
+	<definition name="UserReservationsListDef" extends="baseLayoutWithMenu">
+		<put-attribute name="body" value="/views/reservations/UserReservationsList.jsp" />
 	</definition>
 </tiles-definitions>
