@@ -10,6 +10,7 @@
 	<constant name="struts.ui.theme" value="custom_css_xhtml" />
 	<constant name="struts.ui.templateDir" value="template" />
 	<constant name="struts.date.format" value="dd/MM/yyyy" />
+	<constant name="struts.locale" value="en" />
 
 	<package name="struts-2-nsai" namespace="/" extends="struts-default">
 		<result-types>
@@ -39,12 +40,13 @@
 		<global-results>
 			<result name="sessionExpired" type="tiles">LoginDef</result>
 		</global-results>
-
+		
 		<!-- Login action mapping -->
 		<action name="*Login" class="pl.dmcs.nsai.struts2.actions.login.LoginAction" method="{1}">
 			<result name="input" type="tiles">LoginDef</result>
 			<result name="success" type="redirectAction">listParking</result>
 		</action>
+		
 
 		<action name="*Register" class="pl.dmcs.nsai.struts2.actions.login.RegisterAction" method="{1}">
 			<result name="input" type="tiles">RegisterDef</result>

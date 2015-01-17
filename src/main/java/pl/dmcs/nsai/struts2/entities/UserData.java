@@ -1,6 +1,9 @@
 package pl.dmcs.nsai.struts2.entities;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,12 +12,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name = "users")
-public class UserData extends AbstractEntity {
+public class UserData extends AbstractEntity implements UserDetails {
 	private static final long serialVersionUID = -9088782719960350724L;
 
 	@Id
@@ -23,30 +30,68 @@ public class UserData extends AbstractEntity {
 
 	@Column(nullable = false, length = 30)
 	private String login;
-	
+
 	@Column(nullable = false)
 	private String passwordEncrypted;
-	
+
 	@Column(length = 50)
 	private String firstName;
 
 	@Column(length = 100)
 	private String lastName;
-	
+
 	@Column(nullable = false, length = 100)
 	private String email;
-	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "userData")
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "userData")
 	private List<ParkingPlaceReservationData> placeReservations;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<SecurityRoleData> securityRoles;
 
 	@Override
 	public Integer getId() {
 		return this.id;
 	}
-	
+
 	@Override
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.securityRoles;
+	}
+
+	@Override
+	public String getPassword() {
+		return this.passwordEncrypted;
+	}
+
+	@Override
+	public String getUsername() {
+		return this.login;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 	public String getLogin() {
@@ -89,6 +134,25 @@ public class UserData extends AbstractEntity {
 		this.email = email;
 	}
 
+	public List<ParkingPlaceReservationData> getPlaceReservations() {
+		return placeReservations;
+	}
+
+	public void setPlaceReservations(List<ParkingPlaceReservationData> placeReservations) {
+		this.placeReservations = placeReservations;
+	}
+
+	public Set<SecurityRoleData> getSecurityRoles() {
+		if (this.securityRoles == null) {
+			this.securityRoles = new HashSet<>();
+		}
+		return securityRoles;
+	}
+
+	public void setSecurityRoles(Set<SecurityRoleData> securityRoles) {
+		this.securityRoles = securityRoles;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

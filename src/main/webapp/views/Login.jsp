@@ -7,7 +7,7 @@
 		<s:text name="login.title" />
 	</h2>
 
-	<s:form method="POST" action="loginLogin" cssClass="well">
+	<s:form method="POST" action="inputLogin" cssClass="well">
 		<s:textfield name="username" key="login.username" cssClass="form-control" />
 		<s:password name="password" key="login.password" cssClass="form-control" />
 

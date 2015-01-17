@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import org.springframework.security.core.context.SecurityContextHolder;
 
-import pl.dmcs.nsai.struts2.actions.login.LoginAction;
 import pl.dmcs.nsai.struts2.entities.UserData;
 import pl.dmcs.nsai.struts2.utils.DateTimeUtil;
 
@@ -63,7 +63,7 @@ public abstract class AbstractAction extends ActionSupport implements ServletReq
 	}
 
 	public UserData getLoggedUser() {
-		return (UserData) this.getRequest().getSession().getAttribute(LoginAction.USER_CONTEXT_PARAM_NAME);
+		return (UserData) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 	
 	public HttpServletRequest getRequest() {

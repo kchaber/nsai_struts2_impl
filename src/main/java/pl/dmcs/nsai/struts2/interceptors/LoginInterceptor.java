@@ -2,16 +2,20 @@ package pl.dmcs.nsai.struts2.interceptors;
 
 import java.util.Map;
 
+import pl.dmcs.nsai.struts2.actions.AbstractAction;
 import pl.dmcs.nsai.struts2.actions.LocaleAction;
 import pl.dmcs.nsai.struts2.actions.login.LoginAction;
 import pl.dmcs.nsai.struts2.actions.login.RegisterAction;
+import pl.dmcs.nsai.struts2.entities.UserData;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 /**
- * Interceptor checks whether the current session has expired and redirects user to the login page.
+ * Interceptor checks whether the current session has expired and redirects user
+ * to the login page.
+ * 
  * @author KCH, JB
  *
  */
@@ -22,21 +26,26 @@ public class LoginInterceptor extends AbstractInterceptor {
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		Map<String, Object> sessionAttributes = invocation.getInvocationContext().getSession();
-		ActionSupport action = (ActionSupport) invocation.getAction();
 		
-		//validates all actions except LoginAction and RegisterAction
-		boolean validateAction = !(action instanceof LoginAction || action instanceof RegisterAction || action instanceof LocaleAction); 
-		
-		//check if session has expired
-		if (validateAction && (sessionAttributes == null || sessionAttributes.get(LoginAction.USER_CONTEXT_PARAM_NAME) == null)) {
-			action.addActionError(action.getText("errors.sessionExpired"));
+		/*ActionSupport action = (ActionSupport) invocation.getAction();
 
-			//if session expired then move user to the login page
-			//@see global-results in the struts.xml file
-			return "sessionExpired";
-		}
+		// validates all actions except LoginAction and RegisterAction
+		boolean validateAction = action instanceof AbstractAction && !(action instanceof LoginAction || action instanceof RegisterAction || action instanceof LocaleAction);
 
-		//if session is still active then continue action invocation
+		// check if session has expired
+		if (validateAction) {
+			UserData user = ((AbstractAction) action).getLoggedUser();
+
+			if (sessionAttributes == null || user == null) {
+				action.addActionError(action.getText("errors.sessionExpired"));
+
+				// if session expired then move user to the login page
+				// @see global-results in the struts.xml file
+				return "sessionExpired";
+			}
+		}*/
+
+		// if session is still active then continue action invocation
 		return invocation.invoke();
 	}
 }
