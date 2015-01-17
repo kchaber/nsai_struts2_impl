@@ -1,0 +1,1 @@
+mvn deploy:deploy-file -Durl=E:\OneDrive\Workspaces\java_new\nsai_struts2_impl\local_repository -Dfile=simplecaptcha-1.2.1.jar -DgroupId=pl.dmcs.nsai -DartifactId=simplecaptcha -Dpackaging=jar -Dversion=1.2.1

@@ -22,6 +22,16 @@
 			</s:a>
 		</div>
 	</s:if>
+	<s:else>
+		<div class="text-right">
+			<s:a href="inputLogin" theme="simple" cssClass="btn btn-warning btn-xs">
+				<s:text name="buttons.login" />
+			</s:a>
+			<s:a href="inputRegister" theme="simple" cssClass="btn btn-warning btn-xs">
+				<s:text name="buttons.register" />
+			</s:a>
+		</div>
+	</s:else>
 
 	<s:set var="isAdminUser" value="%{false}" />
 	<sec:authorize access="hasRole('ROLE_ADMIN')">

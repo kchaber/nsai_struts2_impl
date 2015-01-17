@@ -10,6 +10,15 @@
 		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
 	</properties>
 
+	<repositories>
+		<!--other repositories if any -->
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/local_repository</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -32,6 +41,12 @@
 			<groupId>com.jgeppert.struts2.jquery</groupId>
 			<artifactId>struts2-jquery-plugin</artifactId>
 			<version>3.7.1</version>
+		</dependency>
+		<!-- CAPTCHA -->
+		<dependency>
+			<groupId>pl.dmcs.nsai</groupId>
+			<artifactId>simplecaptcha</artifactId>
+			<version>1.2.1</version>
 		</dependency>
 		<!-- Struts 2 Spring -->
 		<dependency>
@@ -118,7 +133,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- SPRING SECURITY -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
