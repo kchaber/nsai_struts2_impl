@@ -31,7 +31,7 @@ public class UserService implements UserDetailsService {
 	public UserData save(UserData entity) {
 		if (entity.getId() == null && !StringUtils.isEmpty(entity.getPasswordEncrypted())) {
 			// encrypt password
-			entity.setPasswordEncrypted(encoder.encode(entity.getPassword()));
+			entity.setPasswordEncrypted(this.encodePassword(entity.getPasswordEncrypted()));
 
 			SecurityRoleData userRole = this.securityRoleDAO.findByName(SecurityRoleData.USER_ROLE_NAME);
 			if (userRole != null) {
@@ -41,6 +41,11 @@ public class UserService implements UserDetailsService {
 		entity = this.userDAO.save(entity);
 
 		return entity;
+	}
+	
+	public String encodePassword(String password) {
+		String encodedPassword = encoder.encode(password);
+		return encodedPassword;
 	}
 
 	public void remove(Integer userId) {

@@ -3,11 +3,14 @@ package pl.dmcs.nsai.struts2.actions.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.util.StringUtils;
+
 import pl.dmcs.nsai.struts2.actions.AbstractCRUDAction;
 import pl.dmcs.nsai.struts2.entities.UserData;
 import pl.dmcs.nsai.struts2.services.UserService;
 
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
+import com.opensymphony.xwork2.validator.annotations.FieldExpressionValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 
@@ -16,6 +19,9 @@ public class UsersAction extends AbstractCRUDAction<UserData> {
 	
 	protected UserService userService;
 	protected List<UserData> usersList = new ArrayList<UserData>();
+	
+	private String changePassword;
+	private String changePasswordConfirm;
 	
 	@Validations(
 		requiredStrings = { 
@@ -27,9 +33,16 @@ public class UsersAction extends AbstractCRUDAction<UserData> {
 		},
 		emails = {
 			@EmailValidator(fieldName = "userData.email", key = "${getInvalidEmailFieldMessage(fieldName)}")
+		},
+		fieldExpressions = {
+			@FieldExpressionValidator(fieldName = "changePasswordConfirm", expression = "changePassword == null || changePassword == '' || changePassword eq changePasswordConfirm", message = "${getText('errors.invalidpasswordConfirm')}", shortCircuit = true)
 		}
 	)
 	public String save() throws Exception {
+		if (!StringUtils.isEmpty(this.changePassword)) {
+			String encodedPass = this.userService.encodePassword(this.changePassword);
+			this.managedEntity.setPasswordEncrypted(encodedPass);
+		}
 		this.managedEntity = userService.save(this.managedEntity);
 
 		this.addActionMessage(getText("actionMessages.operationSuccessful"));
@@ -84,5 +97,21 @@ public class UsersAction extends AbstractCRUDAction<UserData> {
 
 	public void setUsersList(List<UserData> usersList) {
 		this.usersList = usersList;
+	}
+
+	public String getChangePassword() {
+		return changePassword;
+	}
+
+	public void setChangePassword(String changePassword) {
+		this.changePassword = changePassword;
+	}
+
+	public String getChangePasswordConfirm() {
+		return changePasswordConfirm;
+	}
+
+	public void setChangePasswordConfirm(String changePasswordConfirm) {
+		this.changePasswordConfirm = changePasswordConfirm;
 	}
 }

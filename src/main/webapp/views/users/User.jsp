@@ -15,6 +15,9 @@
 		<s:textfield name="userData.firstName" key="userData.firstName" cssClass="form-control" />
 		<s:textfield name="userData.lastName" key="userData.lastName" cssClass="form-control" />
 		<s:textfield name="userData.email" key="userData.email" cssClass="form-control" />
+		
+		<s:password key="changePassword" cssClass="form-control" autocomplete="off"/>
+		<s:password key="changePasswordConfirm" cssClass="form-control" />
 
 		<div id="actions" class="form-group form-actions text-right">
 			<s:if test="%{#isAdminUser || userData.equals(getLoggedUser())}">

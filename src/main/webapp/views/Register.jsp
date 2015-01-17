@@ -13,13 +13,14 @@
 		<s:textfield name="userData.email" key="userData.email" cssClass="form-control" />
 		<s:password name="userData.passwordEncrypted" key="userData.passwordEncrypted" cssClass="form-control" />
 		<s:password name="passwordConfirm" key="passwordConfirm" cssClass="form-control" />
-		<div class="form-group">
+		
+		<div class="form-group form-actions">
 			<img id="captchaImg" src="<s:url action='generateCaptchaRegister'/>" alt="" height="50">
-			<s:a onclick="document.forms[0].captchaImg.src='<s:url action='generateCaptchaRegister'/>'+'?sand='+Math.random();">RELOAD</s:a>
-			<s:textfield key="captchaAnswer" cssClass="form-control"/>
+			<s:a onclick="document.forms[0].captchaImg.src='<s:url action='generateCaptchaRegister'/>'+'?seed='+Math.random();">
+				<s:text name="buttons.reloadCaptcha" />
+			</s:a>
 		</div>
-
-
+		<s:textfield key="captchaAnswer" cssClass="form-control" />
 
 		<div id="actions" class="form-group form-actions text-right">
 			<s:submit type="button" method="register" key="buttons.register" theme="simple" cssClass="btn btn-primary" />

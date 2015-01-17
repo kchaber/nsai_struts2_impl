@@ -49,7 +49,7 @@
 
 		<action name="*Register" class="pl.dmcs.nsai.struts2.actions.login.RegisterAction" method="{1}">
 			<interceptor-ref name="nsaiDefaultStack">
-				<param name="scope.session">captchaGeneratedAnswer,captchaAnswer</param>
+				<param name="scope.session">captchaGeneratedAnswer</param>
 			</interceptor-ref>
 			
 			<result name="input" type="tiles">RegisterDef</result>
