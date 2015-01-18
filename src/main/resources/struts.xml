@@ -67,7 +67,7 @@
 		<action name="*Parking" class="pl.dmcs.nsai.struts2.actions.parking.ParkingsAction" method="{1}">
 			<interceptor-ref name="nsaiDefaultStack">
 				<param name="scope.key">PARKINGS</param>
-				<param name="scope.session">parkingData</param>
+				<param name="scope.session">parkingData,reservedPlaces</param>
 			</interceptor-ref>
 
 			<result name="input" type="tiles">ParkingDef</result>

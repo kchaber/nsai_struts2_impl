@@ -14,4 +14,6 @@ public interface ParkingPlaceReservationDAO extends CrudRepository<ParkingPlaceR
 	Set<ParkingPlaceReservationData> findByBookingDateAndParkingPlaceData_ParkingData_Id(Date bookingDate, Integer parkingDataId);
 
 	List<ParkingPlaceReservationData> findByUserData_IdAndBookingDateGreaterThanEqual(Integer userDataId, Date bookingDate, Sort sort);
+	
+	Long countByBookingDateGreaterThanEqualAndParkingPlaceData_ParkingData_Id(Date bookingDate, Integer parkingDataId);
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class ParkingData extends AbstractEntity {
 	@Column
 	private Integer aggregateBookedPlacesSize;
 
-	@OneToMany(mappedBy = "parkingData", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parkingData", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ParkingPlaceData> places;
 
 	@Override

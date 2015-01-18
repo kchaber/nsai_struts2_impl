@@ -1,5 +1,6 @@
 package pl.dmcs.nsai.struts2.entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -43,7 +44,7 @@ public class UserData extends AbstractEntity implements UserDetails {
 	@Column(nullable = false, length = 100)
 	private String email;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "userData")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "userData")
 	private List<ParkingPlaceReservationData> placeReservations;
 
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -135,6 +136,9 @@ public class UserData extends AbstractEntity implements UserDetails {
 	}
 
 	public List<ParkingPlaceReservationData> getPlaceReservations() {
+		if (this.placeReservations == null) {
+			this.placeReservations = new ArrayList<>();
+		}
 		return placeReservations;
 	}
 

@@ -44,4 +44,10 @@ public class ParkingPlaceService {
 		List<ParkingPlaceReservationData> result = this.parkingPlaceReservationDAO.findByUserData_IdAndBookingDateGreaterThanEqual(userId, DateTimeUtil.getStartOfDay(DateTimeUtil.getCurrentDate()), sort);
 		return result;
 	}
+	
+	public boolean isAnyActiveReservation(Integer parkingId) {
+		Long result = this.parkingPlaceReservationDAO.countByBookingDateGreaterThanEqualAndParkingPlaceData_ParkingData_Id(DateTimeUtil.removeTime(DateTimeUtil.getCurrentDate()), parkingId);
+		System.out.println("COUNT: " + result);
+		return result > 0;
+	}
 }

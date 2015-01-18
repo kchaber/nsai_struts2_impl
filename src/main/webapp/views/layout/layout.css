@@ -39,6 +39,11 @@ h3 {
 	margin-bottom: 30px;
 }
 
+.messages {
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
 .navbar a, table a, .form-anchor {
 	color: white;
 	text-decoration: underline;
@@ -60,7 +65,21 @@ table {
 }
 
 .actionMessage {
-	color: green;
+	color: white;
+	font-size: 20px;
+	list-style: none;
+	background: rgba(122, 255, 73, 0.2);
+	width: 100%;
+	padding: 20px;
+}
+
+.action-error {
+	color: #FFF41D;
+	font-size: 20px;
+	list-style: none;
+	background: rgba(250,70,82, 0.2);
+	width: 100%;
+	padding: 20px;
 }
 
 .errorMessage {

@@ -16,9 +16,10 @@
 	</div>
 
 	<div id="app-body" class="container">
-		<s:actionmessage />
-		<s:actionerror />
-
+		<div class="col-sm-12 text-left messages">
+			<s:actionmessage/>
+			<s:actionerror cssClass="action-error"/>
+		</div>
 		<tiles:insertAttribute name="body" />
 	</div>
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import pl.dmcs.nsai.struts2.actions.AbstractCRUDAction;
 import pl.dmcs.nsai.struts2.entities.ParkingData;
+import pl.dmcs.nsai.struts2.services.ParkingPlaceService;
 import pl.dmcs.nsai.struts2.services.ParkingService;
 
 import com.opensymphony.xwork2.validator.annotations.IntRangeFieldValidator;
@@ -16,6 +17,7 @@ public class ParkingsAction extends AbstractCRUDAction<ParkingData> {
 	private static final long serialVersionUID = -6451550369473282420L;
 
 	private ParkingService parkingService;
+	private ParkingPlaceService parkingPlaceService;
 	
 	private List<ParkingData> parkingsList = new ArrayList<>();
 
@@ -57,6 +59,22 @@ public class ParkingsAction extends AbstractCRUDAction<ParkingData> {
 		return LIST;
 	}
 	
+	public String remove() {
+		if (this.selectedId != null) {
+			boolean anyActiveReservations = parkingPlaceService.isAnyActiveReservation(selectedId);
+			System.out.println("A: " + anyActiveReservations);
+			if (!anyActiveReservations) {
+				this.removeManagedEntity(this.selectedId);
+				this.addActionMessage(getText("actionMessages.successfulRemoval"));
+			} else {
+				this.addActionError(getText("actionError.cannotRemoveParkingWithActiveReservations"));
+				return INPUT;
+			}
+		}
+
+		return this.list();
+	}
+	
 	@Override
 	public void removeManagedEntity(Integer id) {
 		this.parkingService.remove(id);
@@ -84,5 +102,13 @@ public class ParkingsAction extends AbstractCRUDAction<ParkingData> {
 
 	public void setParkingsList(List<ParkingData> parkingsList) {
 		this.parkingsList = parkingsList;
+	}
+
+	public ParkingPlaceService getParkingPlaceService() {
+		return parkingPlaceService;
+	}
+
+	public void setParkingPlaceService(ParkingPlaceService parkingPlaceService) {
+		this.parkingPlaceService = parkingPlaceService;
 	}
 }

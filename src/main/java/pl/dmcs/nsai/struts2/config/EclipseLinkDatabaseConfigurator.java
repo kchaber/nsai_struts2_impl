@@ -32,7 +32,12 @@ public class EclipseLinkDatabaseConfigurator {
 		Properties properties = new Properties();
         properties.setProperty("eclipselink.logging.level", "fine");
         properties.setProperty("eclipselink.weaving", "false");
-        properties.setProperty("eclipselink.ddl-generation", "create-or-extend-tables");
+        properties.setProperty("eclipselink.ddl-generation", "none");
+        //uncomment to generate ddl automatically
+        //properties.setProperty("eclipselink.ddl-generation", "create-or-extend-tables");
+        properties.setProperty("eclipselink.cache.shared.default", "false");
+        properties.setProperty("eclipselink.refresh", "true");
+        
         
         return properties;
 	}

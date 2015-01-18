@@ -68,7 +68,6 @@ public class ParkingPlaceReservationAction extends AbstractCRUDAction<ParkingPla
 			this.parkingPlaceService.createReservation(this.getLoggedUser(), parkingPlace, this.managedEntity.getBookingDate());
 		}
 		
-		this.setSelectedParkingPlaceIndexesString(null);
 		//reload reserved parking places
 		this.listReserved();
 		

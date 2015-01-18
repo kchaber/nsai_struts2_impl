@@ -10,15 +10,17 @@
 		<title>Struts 2 NSAI</title>
 	</head>
 	<body>
-		<div id="app-header" class="col-sm-12" style="margin-bottom: 80px;">
+		<div id="app-header" class="col-sm-12">
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="topMenu" />
 		</div>
 		
 		<div id="app-body" class="container">
-			<s:actionmessage/>
-			<s:actionerror/>
-		
+			<div class="col-sm-12 text-left messages">
+				<s:actionmessage/>
+				<s:actionerror cssClass="action-error"/>
+			</div>
+			
 			<tiles:insertAttribute name="body" />
 		</div>
 
