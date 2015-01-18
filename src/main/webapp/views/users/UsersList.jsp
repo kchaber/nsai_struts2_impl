@@ -2,12 +2,12 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<div class="col-sm-12">
+<div class="col-sm-12 well">
 	<h2>
-		<s:text name="usersList.title" /><br/>
+		<s:text name="usersList.title" />
 	</h2>
 
-	<display:table name="usersList" class="table table-condensed table-striped table-bordered table-hover" requestURI="">
+	<display:table name="usersList" class="table table-bordered" requestURI="">
 		<display:column property="id" paramId="selectedId" paramProperty="id" sortable="true" href="modifyUser" media="html" titleKey="userData.id" />
 		<display:column property="login" sortable="true" titleKey="userData.login" />
 		<display:column property="firstName" sortable="true" titleKey="userData.firstName" />

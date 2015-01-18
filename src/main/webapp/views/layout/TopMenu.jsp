@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div class="navbar-header">
+<nav  class="navbar navbar-form navbar-left">
 	<s:form method="POST">
 		<s:a action="listParking" theme="simple" cssClass="navbar-link navbar-brand"><s:text name="menu.parkings.title"/></s:a>
 		
@@ -13,4 +13,4 @@
 			</s:a>
 		</s:if>
 	</s:form>
-</div>
+</nav>

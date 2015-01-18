@@ -1,23 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div class="col-sm-12">
+<div class="col-sm-12 well">
 	<h2>
 		<s:text name="userReservations.title" />
-		<br />
 	</h2>
-	<s:form id="parkingForm" action="saveParking" method="POST">
+	<s:form id="parkingForm" action="saveParking" method="POST" cssClass="well">
 		<s:set var="currBookingDate" value="" />
 
 		<s:iterator value="activeReservations" var="parkingPlaceReservation" status="it">
 			<s:if test="%{#it.index <= 0 || !#currBookingDate.equals(#parkingPlaceReservation.bookingDate)}">
 				<br />
 				<s:set var="currBookingDate" value="%{#parkingPlaceReservation.bookingDate}" />
-				<h3>
+				<h2>
 					<s:text name="user.reservations.bookDate.title" />
 					:&nbsp;
 					<s:property value="%{#currBookingDate}" />
-				</h3>
+				</h2>
 				<hr />
 			</s:if>
 

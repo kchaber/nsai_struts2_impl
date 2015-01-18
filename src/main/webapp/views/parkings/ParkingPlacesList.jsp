@@ -4,7 +4,11 @@
 
 <link rel="stylesheet" href="views/parkings/style.css">
 
-<div class="col-sm-12">
+<div class="col-sm-12 well">
+	<h2>
+		<s:text name="parkingPlaceReservationData.title" />
+	</h2>	
+
 	<s:form id="parkingplace-reservation-form" action="inputPlaceReservation" method="POST" cssClass="well">
 		<s:hidden name="selectedParkingPlaceIndexesString" id="selectedParkingPlaceIndexesStringHidden" />
 
@@ -14,7 +18,6 @@
 				onchange="reloadReservations();" minDate="%{getCurrentDate()}" />
 		</div>
 
-		<label class="label-control" style="margin-left: 40px;"><s:text name="parkingPlaceReservationData.title" />:</label>
 		<div id="selected-parking-places-div" style="margin-bottom: 20px; margin-left: 40px;"></div>
 
 		<s:set var="baseWidth" value="50" />

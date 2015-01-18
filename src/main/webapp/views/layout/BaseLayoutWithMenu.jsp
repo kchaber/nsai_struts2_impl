@@ -10,7 +10,7 @@
 		<title>Struts 2 NSAI</title>
 	</head>
 	<body>
-		<div id="app-header" class="navbar navbar-default">
+		<div id="app-header" class="col-sm-12" style="margin-bottom: 80px;">
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="topMenu" />
 		</div>
@@ -22,7 +22,7 @@
 			<tiles:insertAttribute name="body" />
 		</div>
 
-		<div id="app-footer"  class="footer" style="margin-top: 120px;height: 80px;">
+		<div id="app-footer"  class="footer opacity" style="margin-top: 350px;height: 80px;">
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</body>

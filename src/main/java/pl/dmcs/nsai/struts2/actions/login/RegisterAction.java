@@ -1,11 +1,13 @@
 package pl.dmcs.nsai.struts2.actions.login;
 
+import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import nl.captcha.Captcha;
-import nl.captcha.gimpy.DropShadowGimpyRenderer;
+import nl.captcha.gimpy.FishEyeGimpyRenderer;
+import nl.captcha.gimpy.RippleGimpyRenderer;
 import nl.captcha.servlet.CaptchaServletUtil;
 import nl.captcha.text.producer.DefaultTextProducer;
 import pl.dmcs.nsai.struts2.actions.user.UsersAction;
@@ -59,7 +61,7 @@ public class RegisterAction extends UsersAction {
 	public String generateCaptcha() throws Exception {
 		Captcha captcha = new Captcha.Builder(200, 50)
 				.addText(new DefaultTextProducer())
-				.gimp(new DropShadowGimpyRenderer())
+				.gimp(new RippleGimpyRenderer())
 				.addNoise()
 				.addBackground()
 				.build();

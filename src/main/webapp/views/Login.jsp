@@ -2,7 +2,7 @@
 <%-- INCLUDE IT TO HAVE ACCESS TO THE STRUTS 2 TAGS --%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div class="col-sm-4 col-sm-offset-4">
+<div class="col-sm-6 col-sm-offset-3 well">
 	<h2>
 		<s:text name="login.title" />
 	</h2>

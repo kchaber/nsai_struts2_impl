@@ -1,7 +1,68 @@
+body {
+	margin: 0;
+	background: url('../../images/background.jpg') !important;
+	background-size: 1440px 800px;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+}
+
+.footer {
+	background: rgba(9, 172, 251, 0.3);
+	color: white;
+}
+
+.well {
+	background: rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+	color: white;
+	margin-bottom: 30px;
+}
+
+h3 {
+	color: white;
+}
+
+.label-control {
+	color: white;
+}
+
+.errorLabel {
+	color: white;
+}
+
+#app-header {
+	background: rgba(9, 172, 251, 0.4);
+	color: white;
+	border-bottom: 1px solid white;
+	margin-bottom: 30px;
+}
+
+.navbar a, table a, .form-anchor {
+	color: white;
+	text-decoration: underline;
+}
+
+.navbar a:HOVER, table a:HOVER, .form-anchor:HOVER {
+	color: #1edbf6;
+	text-decoration: underline;
+}
+
+.brand {
+	color: white;
+}
+
+table {
+	color: #00ECFE;
+	font-weight: bold;
+	background: rgba(0, 0, 0, 0.7);
+}
+
 .actionMessage {
 	color: green;
 }
 
 .errorMessage {
-	color: red;
+	color: #FFF41D;
 }

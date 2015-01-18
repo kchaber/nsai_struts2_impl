@@ -4,6 +4,8 @@
 <hr/>
 
 <div class="col-sm-6 col-sm-offset-3">
-	<span class="col-sm-6 text-left"><s:text name="footer.msgRights" /></span>
-	<span class="col-sm-6 text-right"><s:text name="footer.msgCopyright" /></span>
+	<h5 class="col-sm-offset-2 whiteText"> 
+		<s:text name="footer.msgRights" />.&nbsp; 
+		<s:text name="footer.msgCopyright" />
+	</h5>
 </div>

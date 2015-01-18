@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div class="col-sm-4 col-sm-offset-4">
+<div class="col-sm-6 col-sm-offset-3 well">
 	<h2>
 		<s:text name="register.title" />
 	</h2>
@@ -16,7 +16,7 @@
 		
 		<div class="form-group form-actions">
 			<img id="captchaImg" src="<s:url action='generateCaptchaRegister'/>" alt="" height="50">
-			<s:a onclick="document.forms[0].captchaImg.src='<s:url action='generateCaptchaRegister'/>'+'?seed='+Math.random();">
+			<s:a cssClass="form-anchor" onclick="document.forms[0].captchaImg.src='<s:url action='generateCaptchaRegister'/>'+'?seed='+Math.random();">
 				<s:text name="buttons.reloadCaptcha" />
 			</s:a>
 		</div>
