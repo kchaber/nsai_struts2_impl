@@ -24,8 +24,7 @@ public class ParkingService {
 			oldParkingData = this.findById(entity.getId());
 		}
 		
-		if (entity.getAggregateBookedPlacesSize().compareTo(0) <= 0 && 
-			((oldParkingData == null) || (oldParkingData != null && ObjectUtils.notEqual(oldParkingData.getCapacity(), entity.getCapacity())))) {
+		if (((oldParkingData == null) || (oldParkingData != null && ObjectUtils.notEqual(oldParkingData.getCapacity(), entity.getCapacity())))) {
 			this.generateParkingPlaces(entity);
 		}
 		

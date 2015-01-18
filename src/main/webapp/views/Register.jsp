@@ -15,7 +15,7 @@
 		<s:password name="passwordConfirm" key="passwordConfirm" cssClass="form-control" />
 		
 		<div class="form-group form-actions">
-			<img id="captchaImg" src="<s:url action='generateCaptchaRegister'/>" alt="" height="50">
+			<img id="captchaImg" style="background: white;" src="<s:url action='generateCaptchaRegister'/>" alt="" height="50">
 			<s:a cssClass="form-anchor" onclick="document.forms[0].captchaImg.src='<s:url action='generateCaptchaRegister'/>'+'?seed='+Math.random();">
 				<s:text name="buttons.reloadCaptcha" />
 			</s:a>

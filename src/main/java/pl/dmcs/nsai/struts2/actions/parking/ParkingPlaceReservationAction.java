@@ -1,5 +1,6 @@
 package pl.dmcs.nsai.struts2.actions.parking;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,6 +50,8 @@ public class ParkingPlaceReservationAction extends AbstractCRUDAction<ParkingPla
 	public String listReserved() {
 		this.setSelectedParkingPlaceIndexesString(null);
 		this.reservedPlaces = this.parkingPlaceService.findByBookingDateAndParkingId(this.getParkingPlaceReservationData().getBookingDate(), this.getParkingData().getId());
+		Collections.sort(this.parkingData.getPlaces());
+		
 		
 		return SUCCESS;
 	}

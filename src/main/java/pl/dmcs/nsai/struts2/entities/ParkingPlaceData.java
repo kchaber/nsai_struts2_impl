@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "parking_places")
-public class ParkingPlaceData extends AbstractEntity {
+public class ParkingPlaceData extends AbstractEntity implements Comparable<ParkingPlaceData> {
 	private static final long serialVersionUID = -5762220801587440108L;
 
 	@Id
@@ -24,9 +24,6 @@ public class ParkingPlaceData extends AbstractEntity {
 
 	@Column(nullable = false)
 	private Integer orderNum;
-
-	@Column(length = 1)
-	private Boolean free = true;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private ParkingData parkingData;
@@ -77,19 +74,16 @@ public class ParkingPlaceData extends AbstractEntity {
 		this.parkingData = parkingData;
 	}
 
-	public Boolean getFree() {
-		return free;
-	}
-
-	public void setFree(Boolean free) {
-		this.free = free;
-	}
-
 	public Integer getOrderNum() {
 		return orderNum;
 	}
 
 	public void setOrderNum(Integer orderNum) {
 		this.orderNum = orderNum;
+	}
+
+	@Override
+	public int compareTo(ParkingPlaceData o) {
+		return orderNum.compareTo(o.orderNum);
 	}
 }

@@ -13,7 +13,7 @@
 		</s:if>
 		<s:textfield name="parkingData.name" key="parkingData.name" cssClass="form-control" />
 		<s:textfield name="parkingData.streetName" key="parkingData.streetName" cssClass="form-control" />
-		<s:textfield name="parkingData.capacity" key="parkingData.capacity" disabled="%{parkingData.aggregateBookedPlacesSize > 0}" cssClass="form-control" />
+		<s:textfield name="parkingData.capacity" key="parkingData.capacity" cssClass="form-control" disabled="%{parkingData.id != null}" />
 
 		<div id="actions" class="form-group form-actions text-right">
 			<s:if test="%{#isAdminUser}">

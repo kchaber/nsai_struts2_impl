@@ -14,6 +14,7 @@
 
 	<s:if test="%{getLoggedUser() != null}">
 		<div class="text-right clearfix">
+			Hello:&nbsp;<s:property value="%{getLoggedUser().login}"/>&nbsp; 
 			<s:a href="logout" theme="simple" cssClass="btn btn-danger btn-xs">
 				<s:text name="buttons.logout" />
 			</s:a>

@@ -33,12 +33,9 @@ public class ParkingData extends AbstractEntity {
 	@Column(nullable = false)
 	private Integer capacity;
 	
-	@Column
-	private Integer aggregateBookedPlacesSize;
-
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parkingData", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ParkingPlaceData> places;
-
+	
 	@Override
 	public Integer getId() {
 		return this.id;
@@ -87,16 +84,5 @@ public class ParkingData extends AbstractEntity {
 
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
-	}
-
-	public Integer getAggregateBookedPlacesSize() {
-		if (this.aggregateBookedPlacesSize == null) {
-			this.aggregateBookedPlacesSize = 0;
-		}
-		return aggregateBookedPlacesSize;
-	}
-
-	public void setAggregateBookedPlacesSize(Integer aggregateBookedPlacesSize) {
-		this.aggregateBookedPlacesSize = aggregateBookedPlacesSize;
 	}
 }

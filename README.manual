@@ -1,0 +1,11 @@
+1) BEFORE START, run the db_dump.sql (placed in the resources folder) to create Postgres database with initial data
+	OR {
+	   edit the class pl.dmcs.nsai.struts2.config.EclipseLinkDatabaseConfigurator and set
+         properties.setProperty("eclipselink.ddl-generation", "create-or-extend-tables");
+       instead of
+       	properties.setProperty("eclipselink.ddl-generation", "none");
+       in vendorProperties() method.
+    	
+       then run the postgres_init_data.sql (placed in the resources folder).
+    }
+        

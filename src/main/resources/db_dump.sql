@@ -35,7 +35,6 @@ SET default_with_oids = false;
 
 CREATE TABLE parking_places (
     id integer NOT NULL,
-    free boolean,
     ordernum integer NOT NULL,
     parkingdata_id integer
 );
@@ -105,7 +104,6 @@ ALTER SEQUENCE parking_places_reservations_id_seq OWNED BY parking_places_reserv
 
 CREATE TABLE parkings (
     id integer NOT NULL,
-    aggregatebookedplacessize integer,
     capacity integer NOT NULL,
     name character varying(50) NOT NULL,
     streetname character varying(100) NOT NULL
@@ -256,7 +254,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 -- Data for Name: parking_places; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY parking_places (id, free, ordernum, parkingdata_id) FROM stdin;
+COPY parking_places (id, ordernum, parkingdata_id) FROM stdin;
 \.
 
 
@@ -264,7 +262,7 @@ COPY parking_places (id, free, ordernum, parkingdata_id) FROM stdin;
 -- Name: parking_places_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('parking_places_id_seq', 28, true);
+SELECT pg_catalog.setval('parking_places_id_seq', 30, true);
 
 
 --
@@ -279,14 +277,14 @@ COPY parking_places_reservations (id, bookingdate, parkingplacedata_id, userdata
 -- Name: parking_places_reservations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('parking_places_reservations_id_seq', 9, true);
+SELECT pg_catalog.setval('parking_places_reservations_id_seq', 6, true);
 
 
 --
 -- Data for Name: parkings; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY parkings (id, aggregatebookedplacessize, capacity, name, streetname) FROM stdin;
+COPY parkings (id, capacity, name, streetname) FROM stdin;
 \.
 
 
@@ -294,7 +292,7 @@ COPY parkings (id, aggregatebookedplacessize, capacity, name, streetname) FROM s
 -- Name: parkings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('parkings_id_seq', 2, true);
+SELECT pg_catalog.setval('parkings_id_seq', 1, true);
 
 
 --
@@ -319,7 +317,7 @@ SELECT pg_catalog.setval('security_roles_id_seq', 2, true);
 --
 
 COPY users (id, email, firstname, lastname, login, passwordencrypted) FROM stdin;
-1	admin@admin.pl	admin	admin	admin	$2a$10$OBC./Pc2P8NzfxIat1u/9esOIEuH0PtxoQ53iiDNo.hBeBXDHpmqS
+1	admin@admin.pl	admin	admin	admin	$2a$10$e2KSFCEQMvyH1YWilmrfJuJ66NXiCVX3dLRyXndevyuYW0EAK/JfC
 \.
 
 
@@ -327,7 +325,7 @@ COPY users (id, email, firstname, lastname, login, passwordencrypted) FROM stdin
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('users_id_seq', 3, true);
+SELECT pg_catalog.setval('users_id_seq', 2, true);
 
 
 --
