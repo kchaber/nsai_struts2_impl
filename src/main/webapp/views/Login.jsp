@@ -3,6 +3,12 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div class="col-sm-6 col-sm-offset-3 well">
+	<s:if test="%{#parameters.error != null}">
+		<div class="action-error">
+			<s:text name="erorrs.loginFailed" />
+		</div>
+	</s:if>
+
 	<h2>
 		<s:text name="login.title" />
 	</h2>

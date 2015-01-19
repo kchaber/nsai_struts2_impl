@@ -3,6 +3,8 @@ package pl.dmcs.nsai.struts2.actions.parking;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
+
 import pl.dmcs.nsai.struts2.actions.AbstractCRUDAction;
 import pl.dmcs.nsai.struts2.entities.ParkingData;
 import pl.dmcs.nsai.struts2.services.ParkingPlaceService;
@@ -34,9 +36,14 @@ public class ParkingsAction extends AbstractCRUDAction<ParkingData> {
 		}
 	)
 	public String save() throws Exception {
-		this.managedEntity = parkingService.save(this.managedEntity);
+		if (this.getLoggedUser() != null && ServletActionContext.getRequest().isUserInRole("ROLE_ADMIN")) {
+			this.managedEntity = parkingService.save(this.managedEntity);
 
-		this.addActionMessage(getText("actionMessages.operationSuccessful"));
+			this.addActionMessage(getText("actionMessages.operationSuccessful"));
+		} else {
+			this.addActionError(getText("errors.unsufficentPrivileges"));
+			return INPUT;
+		}
 		
 		return SUCCESS;
 	}
@@ -60,16 +67,21 @@ public class ParkingsAction extends AbstractCRUDAction<ParkingData> {
 	}
 	
 	public String remove() {
-		if (this.selectedId != null) {
-			boolean anyActiveReservations = parkingPlaceService.isAnyActiveReservation(selectedId);
-			System.out.println("A: " + anyActiveReservations);
-			if (!anyActiveReservations) {
-				this.removeManagedEntity(this.selectedId);
-				this.addActionMessage(getText("actionMessages.successfulRemoval"));
-			} else {
-				this.addActionError(getText("actionError.cannotRemoveParkingWithActiveReservations"));
-				return INPUT;
+		if (this.getLoggedUser() != null && ServletActionContext.getRequest().isUserInRole("ROLE_ADMIN")) {
+			if (this.selectedId != null) {
+				boolean anyActiveReservations = parkingPlaceService.isAnyActiveReservation(selectedId);
+				System.out.println("A: " + anyActiveReservations);
+				if (!anyActiveReservations) {
+					this.removeManagedEntity(this.selectedId);
+					this.addActionMessage(getText("actionMessages.successfulRemoval"));
+				} else {
+					this.addActionError(getText("actionError.cannotRemoveParkingWithActiveReservations"));
+					return INPUT;
+				}
 			}
+		} else {
+			this.addActionError(getText("errors.unsufficentPrivileges"));
+			return INPUT;
 		}
 
 		return this.list();

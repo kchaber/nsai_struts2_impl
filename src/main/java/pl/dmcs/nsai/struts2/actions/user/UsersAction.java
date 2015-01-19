@@ -3,6 +3,7 @@ package pl.dmcs.nsai.struts2.actions.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.util.StringUtils;
 
 import pl.dmcs.nsai.struts2.actions.AbstractCRUDAction;
@@ -39,13 +40,20 @@ public class UsersAction extends AbstractCRUDAction<UserData> {
 		}
 	)
 	public String save() throws Exception {
-		if (!StringUtils.isEmpty(this.changePassword)) {
-			String encodedPass = this.userService.encodePassword(this.changePassword);
-			this.managedEntity.setPasswordEncrypted(encodedPass);
-		}
-		this.managedEntity = userService.save(this.managedEntity);
+		if (this.getLoggedUser() != null && 
+				(this.getLoggedUser().getId().equals(this.managedEntity.getId()) || ServletActionContext.getRequest().isUserInRole("ROLE_ADMIN"))) {
 
-		this.addActionMessage(getText("actionMessages.operationSuccessful"));
+			if (!StringUtils.isEmpty(this.changePassword)) {
+				String encodedPass = this.userService.encodePassword(this.changePassword);
+				this.managedEntity.setPasswordEncrypted(encodedPass);
+			}
+			this.managedEntity = userService.save(this.managedEntity);
+
+			this.addActionMessage(getText("actionMessages.operationSuccessful"));
+		} else {
+			this.addActionError(getText("errors.unsufficentPrivileges"));
+			return INPUT;
+		}
 		
 		return SUCCESS;
 	}
